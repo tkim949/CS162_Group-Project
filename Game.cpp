@@ -29,6 +29,11 @@ void Game::play(){
     int numb;
     int cont;
     int pAgain;
+    
+    std::cout<<"Welcome to the ants and doodle bugs' Predator-Prey simulation world"<<std::endl;
+	std::cout<<"If you input the number of days that you want to go, you can see it"<<std::endl;
+	std::cout<<"You can continue after the simulation ends, ";
+	std::cout<<"and also you can exit at that time. Now, let's begin."<<std::endl;
 
     do {
 
