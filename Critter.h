@@ -48,4 +48,4 @@ public:
 };
 
 
-#endif CRITTER_H
+#endif //CRITTER_H
