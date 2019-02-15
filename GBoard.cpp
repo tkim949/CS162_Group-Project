@@ -1,10 +1,12 @@
-/************************************************************************************************
-* * Created by Taekyoung Kim on 2019-02-10.
-* * This was orginally the group project for CS162, but this is my own work.
-* * While I was waiting for other group members' work done to do debugging or checking,
-* * I tried to do this and thankfully, it works well.
-* * GBoard.cpp file
-*********************************************************************************************/
+/****************************************************************************************************
+* * Program name: CS162 Group Project
+* * Group number: # 29
+* * Group member: Taekyoung Kim, Zuhair Ahmed
+* * Date: 02/10/2019
+* * Description: This is GBoard.cpp file for CS162 GroupProject
+* * This project demonstrates a 2D simulation of Predator-Prey Game.
+* * The board is a 2D array and each cell points to a Critter.
+******************************************************************************************************/
 
 #include "GBoard.h"
 #include "Critter.h"
@@ -13,12 +15,14 @@
 #include <iostream>
 #include <random>
 
-
+//Constructor
 GBoard::GBoard() =default;
-GBoard::~GBoard() {
 
-/**************************
+//Destructor
+GBoard::~GBoard() =default;
 
+/*********************************************
+{
     for(int i = 0; i < SIZE ; i++ ) {
         for(int j = 0; j < SIZE ; j++) {
 
@@ -28,9 +32,14 @@ GBoard::~GBoard() {
     }
     delete[] board;
     board = nullptr;
-  **************************/
-}
+ }
+**********************************************/
 
+/******************************************************************
+ * * This setBoard() function create a board of Critters
+ * * with 2D array of pointers.
+ * * @return
+ ******************************************************************/
 Critter*** GBoard::setBoard() {
 
     Critter*** board;
@@ -40,8 +49,8 @@ Critter*** GBoard::setBoard() {
         board[i] = new Critter *[SIZE];
     }
 
-    for (int j=0; j < 20; j++){
-        for (int k=0; k< 20; k++){
+    for (int j=0; j < SIZE; j++){
+        for (int k=0; k< SIZE; k++){
             board[j][k] = nullptr;
         }
     }
@@ -49,6 +58,11 @@ Critter*** GBoard::setBoard() {
     return board;
 }
 
+/*************************************************************************
+ * * This fillBoard() function fills the board with ants and doodle bugs.
+ * * The number of ants are 100 and doodle bugs are 5.
+ * * @param board
+ *************************************************************************/
 
 void GBoard::fillBoard(Critter*** board){
     int antCount = 0;
@@ -89,7 +103,7 @@ void GBoard::fillBoard(Critter*** board){
         locaY = dist3(mt);
 
         if(board[locaX][locaY] == nullptr) {
-            //board[locaX][locaY] = new DoodleBug (locaX, locaY);
+
             board[locaX][locaY] = new DoodleBug ();
             board[locaX][locaY]->setType(DOODLEBUG);
             board[locaX][locaY]->setX(locaX);
@@ -100,6 +114,13 @@ void GBoard::fillBoard(Critter*** board){
 
 }
 
+/********************************************************************************
+ * * This displayBoard() function shows the board.
+ * * It marks [ ] for the empty cell, [0] for the ant, and [X] for doodle bugs
+ * * using ASCII number.
+ * * @param board
+ ********************************************************************************/
+
 void GBoard::displayBoard(Critter*** board){
 
     for (int i = 0; i < SIZE ; i++) {
@@ -108,12 +129,12 @@ void GBoard::displayBoard(Critter*** board){
             if (board[i][j] == nullptr) {
                 std::cout << "[ ]";
             }
-                //else if (board[i][j]->getName() == "Ant") {
+
             else if (board[i][j]->getType() == ANT){
                 std::cout <<"["<< char(79)<<"]";
 
             }
-                //else if (board[i][j]->getName() == "Doodle") {
+
             else if (board[i][j]->getType() == DOODLEBUG) {
                 std::cout <<"[" <<char(88)<<"]";
 
@@ -124,20 +145,34 @@ void GBoard::displayBoard(Critter*** board){
     }
 }
 
-
+/***********************************************************************************
+ * * This oneLotate() function describes one day(turn).
+ * * First, it checks if a cell is empty or not. If not, a critter is checked
+ * * moved = false through the whole board. Next, it checks if there is
+ * * a doodle bug in a cell through the whole board. if so. it calls move().
+ * * After that, it checks if there is an ant in a cell through the whole board.
+ * * If so, it calls move() again. When critter moves, it check if move=false,
+ * * then change it true when they move.
+ * * Next, it checks if there is a doodle bug that hasn't eaten more than 3 days.
+ * * If so, it deletes the doodlebug and make the cell empty.
+ * * Lastly, it checks if there is critter in a cell and if it already moved.
+ * * And, call the breed() function.
+ * * @param board
+ ************************************************************************************/
 
 void GBoard::oneLotate(Critter*** board)
 {
     int i,j;
-    // set all critter's moved = false.
+
+    //First check if cell is not empty, which means critters there and set all critter's moved = false.
     for (i=0; i<SIZE; i++)
         for (j=0; j<SIZE; j++)
         {
             if (board[i][j]!= nullptr) board[i][j]->moved = false;
         }
-    // Loop through cells in order and move if it's a Doodlebug
 
 
+   //Second, DoodleBug move. Check through cells in order and move if it's a Doodlebug.
     for (i=0; i<SIZE; i++)
         for (j=0; j<SIZE; j++)
         {
@@ -151,7 +186,7 @@ void GBoard::oneLotate(Critter*** board)
             }
         }
 
-    // Loop through cells in order and move if it's an Ant
+    //Then, Ant move. Check through cells in order and move if it's an Ant
     for (i=0; i<SIZE; i++)
         for (j=0; j<SIZE; j++)
         {
@@ -164,11 +199,12 @@ void GBoard::oneLotate(Critter*** board)
                 }
             }
         }
-    // Loop through cells in order and check if we should breed
+
+    //Remove any doodlebugs that haven't eaten for more than 3 days.
     for (i=0; i<SIZE; i++)
         for (j=0; j<SIZE; j++)
         {
-            // remove any doodlebugs that haven't eaten recently
+
             if ((board[i][j]!= nullptr) &&
                 (board[i][j]->getType()==DOODLEBUG))
             {
@@ -179,11 +215,12 @@ void GBoard::oneLotate(Critter*** board)
                 }
             }
         }
-    // Loop through cells in order and check if critter should breed
+
+    //Next, breed. Check through cells in order and check if critters should breed.
     for (i=0; i<SIZE; i++)
         for (j=0; j<SIZE; j++)
         {
-            // Critter has baby after they have moved.
+            // Critter has baby after they have moved. move is the first one.
             if ((board[i][j]!= nullptr) && (board[i][j]->moved))
             {
                 board[i][j]->breed(board);
@@ -191,6 +228,14 @@ void GBoard::oneLotate(Critter*** board)
         }
 
 }
+
+/*****************************************************************************************
+ * * This deleteBoard() function delete the 2D array of pointers after the process ends.
+ * * It was first placed inside the destructor, but it causes some issues.
+ * * So, this new function was made and placed here.
+ * * @param board
+ *****************************************************************************************/
+
 void GBoard::deleteBoard(Critter*** board) {
 
     for(int i = 0; i < SIZE ; i++ ) {
@@ -207,17 +252,3 @@ void GBoard::deleteBoard(Critter*** board) {
     board = nullptr;
 
 }
-
-/*******************************
-void GBoard::deleteBoard(Critter*** board){
-
-    for(int i = 0; i < 20; i++ ) {
-        for(int j = 0; j < 20; j++) {
-            delete board[i][j];
-        }
-        delete[] board[i];
-    }
-    delete[] board;
-    board = nullptr;
-}
-********************************/

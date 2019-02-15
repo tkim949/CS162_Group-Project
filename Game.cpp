@@ -1,10 +1,12 @@
-/************************************************************************************************
-* * Created by Taekyoung Kim on 2019-02-10.
-* * This was orginally the group project for CS162, but this is my own work.
-* * While I was waiting for other group members' work done to do debugging or checking,
-* * I tried to do this and thankfully, it works well.
-* * Game.cpp file
-*********************************************************************************************/
+/****************************************************************************************************
+* * Program name: CS162 Group Project
+* * Group number: # 29
+* * Group member: Taekyoung Kim, Zuhair Ahmed
+* * Date: 02/10/2019
+* * Description: This is Game.cpp file for CS162 GroupProject
+* * This project demonstrates a 2D simulation of Predator-Prey Game.
+* * The board is a 2D array and each cell points to a Critter.
+******************************************************************************************************/
 
 #include "Game.h"
 #include "GBoard.h"
@@ -20,31 +22,27 @@ Game::~Game() = default;
 
 void Game::play(){
 
-
-    //Critter*** board = setBoard();
     GBoard gB;
     Critter*** board = gB.setBoard();
-    //Critter*** board = gB.setBoard();
 
     double oNum;
     int numb;
     int cont;
     int pAgain;
+    
+    std::cout<<"Welcome to the ants and doodle bugs' Predator-Prey simulation world"<<std::endl;
+	std::cout<<"If you input the number of days that you want to go, you can see it"<<std::endl;
+	std::cout<<"You can continue after the simulation ends, ";
+	std::cout<<"and also you can stop, new start, or even exit at that time. Now, let's begin."<<std::endl;
 
     do {
 
         gB.fillBoard(board);
 
-        //gB.displayBoard(board);
-
         do {
             std::cout << "How many days you want to go? please input your number: ";
             std::cin >> oNum;
             numb = inputVal(oNum);
-
-            //gB.oneLotate(board);
-            //std::cout<<std::endl;
-            //gB.displayBoard(board);
 
             for (int i = 0 ; i < numb ; i++) {
 

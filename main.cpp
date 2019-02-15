@@ -1,10 +1,12 @@
-/************************************************************************************************
-* * Created by Taekyoung Kim on 2019-02-10.
-* * This was orginally the group project for CS162, but this is my own work.
-* * While I was waiting for other group members' work done to do debugging or checking,
-* * I tried to do this and thankfully, it works well.
-* * Main.cpp file
-*********************************************************************************************/
+/****************************************************************************************************
+* * Program name: CS162 Group Project
+* * Group number: # 29
+* * Group member: Taekyoung Kim, Zuhair Ahmed
+* * Date: 02/10/2019
+* * Description: This is main.cpp file for CS162 GroupProject
+* * This project demonstrates a 2D simulation of Predator-Prey Game.
+* * The board is a 2D array and each cell points to a Critter.
+******************************************************************************************************/
 
 
 #include <iostream>

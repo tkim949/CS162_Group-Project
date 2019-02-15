@@ -1,26 +1,34 @@
-/************************************************************************************************
-* * Created by Taekyoung Kim on 2019-02-10.
-* * This was orginally the group project for CS162, but this is my own work.
-* * While I was waiting for other group members' work done to do debugging or checking,
-* * I tried to do this and thankfully, it works well.
-* * Ant.cpp file
-*********************************************************************************************/
+/****************************************************************************************************
+* * Program name: CS162 Group Project
+* * Group number: # 29
+* * Group member: Taekyoung Kim, Zuhair Ahmed
+* * Date: 02/10/2019
+* * Description: This is Ant.cpp file for CS162 GroupProject
+* * This project demonstrates a 2D simulation of Predator-Prey Game.
+* * The board is a 2D array and each cell points to a Critter.
+******************************************************************************************************/
 
 
 #include "Ant.h"
 #include <iostream>
 #include <random>
 
-
+//constructor
 Ant::Ant()
     :Critter(-1, -1, ANT)
 {}
 
+//destructor
 Ant::~Ant() = default;
 
+/**********************************************************************************************************
+ * * This move() function decides where an ant goes to. To do this, it first check edge of the board then
+ * * if there is empty cell near that ant. Next, count the number of empty cell assigning a number.
+ * * After that, it picks one number using a random number generator. Then, that ant moves to the new cell.
+ * * @param board
+ ************************************************************************************************************/
+
 void Ant::move(Critter*** board) {
-    //setAge(getAge() + 1);
-    //setGoMove(true);
 
     int findSpace [4];
     int count = 0;
@@ -91,6 +99,13 @@ void Ant::move(Critter*** board) {
 
 }
 
+/*************************************************************************************************************
+ * * This breed() function decides how and when an ant breeds. First, it check if an ant lives 3 or more than
+ * * 3 days(turns). Next, it also checks the edge of the board then if there is an empty cell near the ant.
+ * * If so, it breeds. If not, it waits for the next turn.
+ * * @param board
+ **************************************************************************************************************/
+
 void Ant::breed(Critter*** board) {
     breedTime++;
 
@@ -120,7 +135,8 @@ void Ant::breed(Critter*** board) {
         }
 
         if(count > 0) {
-            breedTime =0;
+            //make breedTime = 0, so count starts again from the next turn.
+            breedTime = 0;
             int chooseSpace;
             int output;
             std::random_device ran;
@@ -130,44 +146,34 @@ void Ant::breed(Critter*** board) {
 
             chooseSpace = findSpace[output];
 
-            //Critter* ant;
-
             switch (chooseSpace) {
 
-                case 1:
-                    //board[getX() - 1][getY()] = new Ant(getX() - 1, getY());
+                case 1: //up
                     board[getX() - 1][getY()] = new Ant();
                     board[getX() - 1][getY()]->setType(ANT);
                     board[getX() - 1][getY()]->setX(getX()-1);
                     board[getX() - 1][getY()]->setY(getY());
-                    //setAge(0);
                     break;
 
-                case 2:
-                    //board[getX() + 1][getY()] = new Ant(getX() + 1, getY());
+                case 2: //down
                     board[getX() + 1][getY()] = new Ant();
                     board[getX() + 1][getY()]->setType(ANT);
                     board[getX() + 1][getY()]->setX(getX()+1);
                     board[getX() + 1][getY()]->setY(getY());
-                    //setAge(0);
                     break;
 
-                case 3:
-                    //board[getX()][getY() - 1] = new Ant(getX(), getY() - 1);
+                case 3: //left
                     board[getX()][getY()-1] = new Ant();
                     board[getX()][getY()-1]->setType(ANT);
                     board[getX()][getY()-1]->setX(getX());
                     board[getX()][getY()-1]->setY(getY()-1);
-                    //setAge(0);
                     break;
 
-                case 4:
-                    //board[getX()][getY() + 1] = new Ant(getX(), getY() + 1);
+                case 4: //right
                     board[getX()][getY()+1] = new Ant();
                     board[getX()][getY()+1]->setType(ANT);
                     board[getX()][getY()+1]->setX(getX());
                     board[getX()][getY()+1]->setY(getY()+1);
-                    //setAge(0);
                     break;
 
                 default:

@@ -1,103 +1,58 @@
-/************************************************************************************************
-* * Created by Taekyoung Kim on 2019-02-10.
-* * This was orginally the group project for CS162, but this is my own work.
-* * While I was waiting for other group members' work done to do debugging or checking,
-* * I tried to do this and thankfully, it works well.
-* * Critter.cpp file
-*********************************************************************************************/
+/****************************************************************************************************
+* * Program name: CS162 Group Project
+* * Group number: # 29
+* * Group member: Taekyoung Kim, Zuhair Ahmed
+* * Date: 02/10/2019
+* * Description: This is Critter.cpp file for CS162 GroupProject
+* * This project demonstrates a 2D simulation of Predator-Prey Game.
+******************************************************************************************************/
 
 
 #include "Critter.h"
 
+//default constructor
 Critter::Critter() =default;
 
+//default destructor
 Critter::~Critter()=default;
 
-/**************************
-int Critter::getAge() const{
-    return this->age;
-}
-void Critter::setAge(int a){
-    age = a;
-}
-
-
-Critter::Critter(Type ty){
-    this->type = ty;
-}
-
-Critter::Critter( int x, int y){
-    this->locX =x;
-    this->locY = y;
-}
-********************************/
-
+//Constructor
 Critter::Critter(int x, int y, Type ty){
     this->locX =x;
     this->locY = y;
     this->type = ty;
 }
 
-
-/***********************
-std::string Critter::getName(){
-    return name;
-}
-void Critter::setName(std::string na){
-    this->name=na;
-}
-****************************/
-
+//Accessor for Type
 Type Critter::getType() {
 
     return this->type;
 }
 
+//Modifier for Type
 void Critter::setType(Type tp){
     type = tp;
 }
 
-
+//Accessor for locX
 int Critter::getX() const{
 
     return this->locX;
 
 }
-
+//Modifier for locX
 void Critter::setX(int x) {
     locX = x;
 }
+
+//Accessor for locY
 int Critter::getY() const {
 
     return this->locY;
-
 }
 
+//Modifier for locY
 void Critter::setY(int y){
 
     locY = y;
 }
-/********************
-bool Critter::getGoMove() const{
-
-    return this-> goMove;
-}
-
-void Critter::setGoMove(bool p) {
-
-    goMove = p;
-}
-***************************/
-/***********************************
-
-void Critter::move(Critter*** c){
-
-    //std::cout<<"Inside move() in Critter class."<<std::endl;
-
-}
-
-void Critter::breed(Critter*** c){
-
-    // std::cout<<"Inside move() in Critter class."<<std::endl;
-
-}****************************************************/
