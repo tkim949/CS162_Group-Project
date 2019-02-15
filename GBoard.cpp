@@ -146,7 +146,7 @@ void GBoard::displayBoard(Critter*** board){
 }
 
 /***********************************************************************************
- * * This oneLotate() function describes one day(turn).
+ * * This oneRotate() function describes one day(turn).
  * * First, it checks if a cell is empty or not. If not, a critter is checked
  * * moved = false through the whole board. Next, it checks if there is
  * * a doodle bug in a cell through the whole board. if so. it calls move().
@@ -160,7 +160,7 @@ void GBoard::displayBoard(Critter*** board){
  * * @param board
  ************************************************************************************/
 
-void GBoard::oneLotate(Critter*** board)
+void GBoard::oneRotate(Critter*** board)
 {
     int i,j;
 

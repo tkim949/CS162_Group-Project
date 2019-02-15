@@ -34,7 +34,7 @@ public:
 
     void fillBoard(Critter*** b);
     void displayBoard(Critter*** b);
-    void oneLotate(Critter*** b);
+    void oneRotate(Critter*** b);
     void deleteBoard(Critter*** b);
 
 };
